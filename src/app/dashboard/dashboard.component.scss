@@ -1,0 +1,23 @@
+
+.example-h2 {
+    margin: 10px;
+  }
+  .original-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  .custom-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+
+  .original-margin {
+    margin: 0 10px;
+  }
+  .custom-margin {
+    margin: 0 10px;
+  }

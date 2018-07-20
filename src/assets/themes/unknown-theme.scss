@@ -1,0 +1,11 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+/*
+*apply styles for unknown themes
+*/
+$unknown-primary: mat-palette($mat-red);
+$unknown-accent: mat-palette($mat-light-blue, 400);
+$unknown-theme: mat-light-theme($unknown-primary, $unknown-accent);
+
+@include angular-material-theme($unknown-theme);

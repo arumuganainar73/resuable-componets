@@ -1,0 +1,79 @@
+@import "~@angular/material/theming";
+@import "../scss/grid";
+@import "../scss/dropdown";
+@import "../scss/table";
+@include mat-core();
+
+$blue-primary: (
+  50: #1f377d,
+  100: #1f377d,
+  200: #1f377d,
+  300: #1f377d,
+  400: #1f377d,
+  500: #1f377d,
+  600: #1f377d,
+  700: #1f377d,
+  800: #1f377d,
+  900: #1f377d,
+  A100: #1f377d,
+  A200: #1f377d,
+  A400: #1f377d,
+  A700: #1f377d,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
+  )
+);
+$blue-secondary: (
+  50: #1f377d,
+  100: #1f377d,
+  200: #1f377d,
+  300: #1f377d,
+  400: #1f377d,
+  500: #1f377d,
+  600: #1f377d,
+  700: #1f377d,
+  800: #1f377d,
+  900: #1f377d,
+  A100: #1f377d,
+  A200: #1f377d,
+  A400: #1f377d,
+  A700: #1f377d,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
+  )
+);
+/* *ng6 blue material theme */
+$ng6-blue-primary: mat-palette($blue-primary);
+$ng6-blue-accent: mat-palette($blue-secondary, 400);
+$ng6-blue-theme: mat-light-theme($ng6-blue-primary, $ng6-blue-accent);
+@include angular-material-theme($ng6-blue-theme);
+
+@include theme-grid($ng6-blue-theme);
+@include theme-dropdown($ng6-blue-theme);
+@include theme-table($ng6-blue-theme);

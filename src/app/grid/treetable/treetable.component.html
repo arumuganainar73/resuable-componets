@@ -1,0 +1,66 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header" *ngIf="loadTableData.filter">
+    <mat-form-field>
+      <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" (click)="filter.value=''; applyFilter('');">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <mat-table  [dataSource]="dataSource" matSort matSortDisabled="{{loadTableData.sortingDisable}}" >
+
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.colData">
+
+      <ng-container *ngIf="column.label !=='Select'">
+        <mat-header-cell *matHeaderCellDef mat-sort-header  [disabled]="column.label=='Action' ? true : false"> {{column.label}} </mat-header-cell>
+      </ng-container>
+      <ng-container *ngIf="column.label ==='Select'" >
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox ng6-checkbox *ngIf="loadTableData.multiselect"
+           (change)="$event ? masterToggle() : null"
+           [checked]="selection.hasValue() && isAllSelected()"
+           [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+          <span *ngIf="!loadTableData.multiselect">{{column.label}} </span>
+        </mat-header-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="select" *ngIf="column.label ==='Select'">
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(element) : null"
+          [checked]="selection.isSelected(element)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container *ngIf="column.label !=='Action'">
+        <mat-cell *matCellDef="let element">
+          <ng-container *ngIf="!element.editing">
+            <span>{{element[column.colData]}}</span>
+          </ng-container>
+          <ng-container *ngIf="element.editing">
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="{{column.label}}" [value]="element[column.colData]" [(ngModel)]="element[column.colData]">
+            </mat-form-field>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+      <ng-container *ngIf="column.label ==='Action'">
+        <mat-cell *matCellDef="let element">
+          <ng-container *ngFor="let button of loadTableData.button">
+            <button type="button" mat-raised-button 
+            (click)="selectSingleRow(element,'saved'); button.event.click ? button.click($event, element):null"
+            (mouseenter)="button.event.mouseenter ? button.mouseenter($event, element):null">{{button.label}}</button>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+  </mat-table>
+
+  <mat-paginator *ngIf="loadTableData.pageNation" [length]="pageLength" 
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+</div>
